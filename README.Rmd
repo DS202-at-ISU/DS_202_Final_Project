@@ -9,65 +9,26 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-knitr::opts_chunk$set(echo = FALSE, warning = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 
-
-# knit_hooks$set( fig.cap = function(before, options, envir) {
-#   if ( before ) {
-#     chr <- sprintf("<p><small><strong><a name='fig:%s' value = %d>Figure %d</a></strong>: %s</small></p>", options$label, options$fig.num, options$fig.num, options$fig.cap)
-#     chr <- sprintf("<p><small><strong><a name='fig:%s'>%s</a></strong>: %s</small></p>", options$label, options$label,  options$fig.cap)
-#     
-#     return(chr)
-#   }
-# })
-# 
-# 
-# chunkref <- local({
-#   function(chunklabel) {
-#     sprintf('[%s](#%s)', chunklabel, paste0("fig:",chunklabel) )
-#   }  
-# })
 
 library(ggplot2)
 library(dplyr)
 library(readr)
+
 # RAW DATA 
 setwd("/Users/chen/Desktop/DS202Lab/Final_project/")
 happy_score <- read.csv("Happiness_Scores.xls-Sheet1.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
 head(happy_score)
-
 ```
 
 This repository serves as a starter repo for your final project, and this Rmd is supposed to serve as a starter file for your project report.
-
-## Part I: Repo Structure {.unnumbered}
-
-The structure sketched out below is an idea of what your repository might look like. You can use it as a starting base and change according to your needs. But think about the changes that you make!
-
-```         
--- code
-|   |   -- any R scripts you need but don't want to include directly in the write-up
--- data
-|   |   -- csv files (cleaned data)
--- data-raw
-|   |   -- raw data files 
-|   |   -- data description files, origin
-|   |   -- Codebook
--- final-project.Rmd
--- images  # only images that are not created by the Rmd
--- LICENSE
--- README.md
--- README.Rmd
--- README_files # folder with files created during the knitting process
-```
-
-## Part II: Project report {.unnumbered}
 
 # Analysis of Worldwide Ladder Score {.unnumbered}
 
 Authors: Cassandra Larsen, Chen Sang
 
-## Abstract (TL;DR) ??? dk if we actually need it {.unnumbered}
+## Abstract ??? dk if we actually need it {.unnumbered}
 
 An abstract is a quick summary of your work. Ideally it should motivate someone to read the rest of the paper. Include one sentence each on
 
@@ -107,6 +68,22 @@ Those are the questions we would like to explore in order to achieve the goal an
 # Quick Data Summary
 
 What are the variables that you will be using in the main part of the report? What are their ranges? You could include a table with variable names, a short explanation, and (very broad) summary statistics.
+
+-   Ladder_score: ladder score of each country
+
+-   Explained_by_Log_GDP_per_capita: measure of a country's economic output that accounts for its number of people
+
+-   Country_name: countries name
+
+-   Explained_by_Social_support: interpersonal connections and community resources contribute to individual and collective well-being.
+
+-   Explained_by_Generosity: measures the average prevalence of generosity within a country
+
+-   Explained_by_Perceptions_of_corruption: level of corruption perception within political institutions and businesses
+
+-   Explained_by_Healthy_life_expectancy: measures the average number of years that a person is expected to live in full health
+
+-   Explained_by_Freedom_to_make_life_choices: measures the individuals' perceived freedom to make life choices, reflecting how free people feel to choose the course of their lives, including major decisions about careers, education, and family life
 
 **Cleaning data:**
 
