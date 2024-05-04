@@ -12,26 +12,31 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE, warning = TRUE)
 
 
-knit_hooks$set( fig.cap = function(before, options, envir) {
-  if ( before ) {
-    chr <- sprintf("<p><small><strong><a name='fig:%s' value = %d>Figure %d</a></strong>: %s</small></p>", options$label, options$fig.num, options$fig.num, options$fig.cap)
-    chr <- sprintf("<p><small><strong><a name='fig:%s'>%s</a></strong>: %s</small></p>", options$label, options$label,  options$fig.cap)
-    
-    return(chr)
-  }
-})
-
-
-chunkref <- local({
-  function(chunklabel) {
-    sprintf('[%s](#%s)', chunklabel, paste0("fig:",chunklabel) )
-  }  
-})
+# knit_hooks$set( fig.cap = function(before, options, envir) {
+#   if ( before ) {
+#     chr <- sprintf("<p><small><strong><a name='fig:%s' value = %d>Figure %d</a></strong>: %s</small></p>", options$label, options$fig.num, options$fig.num, options$fig.cap)
+#     chr <- sprintf("<p><small><strong><a name='fig:%s'>%s</a></strong>: %s</small></p>", options$label, options$label,  options$fig.cap)
+#     
+#     return(chr)
+#   }
+# })
+# 
+# 
+# chunkref <- local({
+#   function(chunklabel) {
+#     sprintf('[%s](#%s)', chunklabel, paste0("fig:",chunklabel) )
+#   }  
+# })
 
 library(ggplot2)
 library(dplyr)
-```
+library(readr)
+# RAW DATA 
+setwd("/Users/chen/Desktop/DS202Lab/Final_project/")
+happy_score <- read.csv("Happiness_Scores.xls-Sheet1.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
+head(happy_score)
 
+```
 
 This repository serves as a starter repo for your final project, and this Rmd is supposed to serve as a starter file for your project report.
 
@@ -39,88 +44,366 @@ This repository serves as a starter repo for your final project, and this Rmd is
 
 The structure sketched out below is an idea of what your repository might look like. You can use it as a starting base and change according to your needs. But think about the changes that you make!
 
-    -- code
-    |   |   -- any R scripts you need but don't want to include directly in the write-up
-    -- data
-    |   |   -- csv files (cleaned data)
-    -- data-raw
-    |   |   -- raw data files 
-    |   |   -- data description files, origin
-    |   |   -- Codebook
-    -- final-project.Rmd
-    -- images  # only images that are not created by the Rmd
-    -- LICENSE
-    -- README.md
-    -- README.Rmd
-    -- README_files # folder with files created during the knitting process
+```         
+-- code
+|   |   -- any R scripts you need but don't want to include directly in the write-up
+-- data
+|   |   -- csv files (cleaned data)
+-- data-raw
+|   |   -- raw data files 
+|   |   -- data description files, origin
+|   |   -- Codebook
+-- final-project.Rmd
+-- images  # only images that are not created by the Rmd
+-- LICENSE
+-- README.md
+-- README.Rmd
+-- README_files # folder with files created during the knitting process
+```
 
 ## Part II: Project report {.unnumbered}
 
+# Analysis of Worldwide Ladder Score {.unnumbered}
 
+Authors: Cassandra Larsen, Chen Sang
 
-# Title of your project {.unnumbered}
-
-Authors: First Name Last Name, First Name Last Name, ...
-
-## Abstract (TL;DR) {.unnumbered}
+## Abstract (TL;DR) ??? dk if we actually need it {.unnumbered}
 
 An abstract is a quick summary of your work. Ideally it should motivate someone to read the rest of the paper. Include one sentence each on
 
 -   what is the project about?
+    -   Since we are graduating soon, and we would like to find out the country that with the highest ladder score
 -   what is the motivation for doing it?
+    -   so that we can move there in order to save my mental health
 -   what data is your work based on? and where does it come from? = what are your main findings? (one sentence each)
+    -   ?????
 
-# Intro/Background/Motivation
+# Intro
 
-What is the topic of your project, why is it relevant?
+The goal of this project is to finding the best countries to live and analyzing what factors contributed to the ladder score the most and the least.
 
-At the end of the Intro, write a sentence describing what each of the (result) sections is about, e.g. in section [Results 1] we show the relationship between XXX and YYY,  section [Results 2] also considers the effect of variable ZZZ. ...
-Finally we conclude with a quick summary of our findings and potential follow-up work in section [Conclusions].
+In pursuit of the stated goal, we will explore the following questions:
 
-Somewhere at the beginning of your project, include a code chunk that includes all of the R packages you are using throughout. In this document, the setup code chunk is called `setup` (see line 8) Also make sure to set defaults for the code chunks - like should they be visible? (probably not: echo=FALSE). Do you want to automatically include warnings? (probably yes, for creating the Rmd, to make sure that all warnings are accounted for)
+#### **Trend Analysis:**
+
+-   What is the relationship between the ‘Ladder score’ and ‘GDP per capita’?
+
+-   Does ‘Social support’ correlate strongly with the ‘Ladder score’?
+
+**Comparative Analysis**:
+
+-   Which countries have the highest ‘Ladder score’?
+
+-   How do factors like ‘Generosity’ and ‘Perceptions of corruption’ vary among the top 5 happiest countries compared to the bottom 5?
+
+**Distribution Analysis**:
+
+-   What is the distribution of the ‘Ladder score’ across all countries? Is it normally distributed?
+
+-   How does the distribution of ‘Healthy life expectancy’ compare to that of ‘Freedom to make life choices’?
+
+Those are the questions we would like to explore in order to achieve the goal and gain insightful thoughts.
 
 # Quick Data Summary
 
 What are the variables that you will be using in the main part of the report? What are their ranges? You could include a table with variable names, a short explanation, and (very broad) summary statistics.
 
+**Cleaning data:**
+
+```{r}
+# Remove rows with any null values
+clean_Happy_data <- na.omit(happy_score)
+
+# Replace dots with underscores in column names
+names(clean_Happy_data) <- gsub("\\.+", "_", names(clean_Happy_data))
+
+# Now the column names have underscores instead of dots
+print(names(clean_Happy_data))
+
+# View the cleaned data
+print(clean_Happy_data)
+
+```
+
 # Results
 
-Each line of exploration is supposed to be featured in one of the Results sections. Make sure to change to more interesting section headers!
+### **Trend Analysis:**
 
-## Results 1
+-   **What is the relationship between the ‘Ladder score’ and ‘GDP per capita’?**
 
-In your write-up, make sure to refer to all of the figures you create. You can include a hyperlink to the [scatterplot](#fig:scatterplot) by using the name of the code chunk (make sure, to give each code chunk a different name). In your markdown document you can create this link either by calling the function `chunkref` with the name of the code chunk in quotes, i.e. `` r chunkref("scatterplot") `` or by using the markdown expression `[scatterplot](#fig:scatterplot)`. Similarly, we can refer to the `r chunkref("2nd scatterplot")`. Note that the figure captions appear above the figures - this saves us from having to scroll up after following the link.
+    -   A linear regression analysis can help us understand how much of the variation in **`Ladder_score`** can be explained by **`Explained_by_Log_GDP_per_capita`**
 
-```{r scatterplot, echo=FALSE, fig.cap="This is the figure caption. Make sure to use the description we practised in the homework: first sentence describes structure of the plot, second sentence describes main finding, third sentence describes outliers/follow-up.", message = FALSE}
+    ```{r}
+    # Perform linear regression
+    linearModel <- lm(Ladder_score ~ Explained_by_Log_GDP_per_capita, data = clean_Happy_data)
 
-mtcars %>% 
-  ggplot(aes(x = wt, y = mpg)) + 
-  geom_point()
+    # Summary of the regression model to see coefficients and statistics
+    summary(linearModel)
+    ```
+
+    ```{r}
+    # Plotting the data points
+    plot(clean_Happy_data$Explained_by_Log_GDP_per_capita, clean_Happy_data$Ladder_score, 
+         main = "Relationship between Ladder Score and Log GDP per Capita",
+         xlab = "Log GDP per Capita (Explained part)",
+         ylab = "Ladder Score",
+         pch = 19, col = "blue")
+
+    # Adding the regression line
+    abline(linearModel, col = "red", lwd = 2)
+
+    # Enhancing the plot with grid lines for better readability
+    grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
+    ```
+
+    -   **Positive Relationship**: There's a clear positive correlation between Log GDP per Capita and Ladder Score. This suggests that as the economic output per capita increases, the happiness score tends to increase as well. This is indicated by the upward slope of the red regression line.
+
+    -   **Strength of the Relationship**: The spread of the blue points around the regression line suggests that while GDP per capita explains a significant portion of the variance in happiness scores, there are also other factors that influence happiness since the points are not perfectly aligned along the line. This is consistent with the R-squared value from your regression summary (approximately 0.59), indicating that around 59% of the variation in Ladder Score can be explained by GDP per capita.
+
+    -   **Statistical Significance**: The regression coefficients for the intercept and Log GDP per capita are both statistically significant (p-values \< 2.2e-16), indicating a very low probability that these results are due to random chance.
+
+**Does ‘Social support’ correlate strongly with the ‘Ladder score’?**
+
+-   Pearson correlation coefficient, which quantifies the strength and direction of the relationship, and to create a scatter plot with a regression line to visually assess the relationship.
+
+```{r}
+# Calculate Pearson correlation coefficient
+correlation <- cor(clean_Happy_data$Explained_by_Social_support, clean_Happy_data$Ladder_score, use = "complete.obs")
+print(paste("Pearson correlation coefficient between Social Support and Ladder Score is:", correlation))
 ```
 
-```{r 2nd scatterplot, echo=FALSE, fig.cap="This is the figure caption. Make sure to use the description we practised in the homework: first sentence describes structure of the plot, second sentence describes main finding, third sentence describes outliers/follow-up.", message = FALSE}
+```{r}
+# Plotting the data points
+plot(clean_Happy_data$Explained_by_Social_support, clean_Happy_data$Ladder_score, 
+     main = "Relationship between Social Support and Ladder Score",
+     xlab = "Social Support",
+     ylab = "Ladder Score",
+     pch = 19, col = "blue")
 
-mtcars %>% 
-  ggplot(aes(x = wt, y = mpg)) + 
-  geom_point()
+# Fit a linear model and add the regression line to the plot
+model <- lm(Ladder_score ~ Explained_by_Social_support, data = clean_Happy_data)
+abline(model, col = "red", lwd = 2)
+
+# Add grid lines for better readability
+grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
+
 ```
 
-Additionally, you can also refer to different sections in your writeup by using anchors (links) to section headers. Here, we are referring to subsection [Results 3]. The code for that is `[Results 3]`.
+-   **`cor()`**: Computes the Pearson correlation coefficient between the two variables. The **`use = "complete.obs"`** argument tells R to use only complete cases, ignoring pairs with missing values.
 
-## Results 2
+-   **`plot()`**: Generates a scatter plot of the two variables.
 
-## Results 3
+-   **`lm()`** and **`abline()`**: Fit a linear regression model to the data and plot the regression line, showing the best linear fit through the data points.
 
-...
+-   **`grid()`**: Adds a grid to the plot for easier visual analysis.
 
-# Conclusions
+The Pearson correlation coefficient will give you a numerical value between -1 and 1 where:
 
-Give a quick summary of your work. Here is the place to be a bit critical and discuss potential limitations. Add a sentence on what else you would have liked to include in your data exploration if you had more time or more members in your team. 
+-   **1** indicates a perfect positive linear relationship,
+
+-   **-1** indicates a perfect negative linear relationship,
+
+-   **0** means no linear relationship.
+
+The scatter plot with the regression line will help visually confirm the relationship and see how tightly the data points cluster around the line, which reflects the strength of the correlation.
+
+-   **Strength of Relationship**: A correlation coefficient of 0.81 is quite high, suggesting a strong association between the levels of social support in a country and its reported happiness (Ladder Score).
+
+-   **Direction of Relationship**: Since the correlation coefficient is positive, it means that as social support increases, the Ladder Score generally increases as well. This implies that countries with higher levels of social support tend to have higher happiness scores.
+
+### **Comparative Analysis**:
+
+-   **Which countries have the highest ‘Ladder score’?**
+
+-   **How do factors like ‘Generosity’ and ‘Perceptions of corruption’ vary among the top 5 happiest countries compared to the bottom 5?**
+
+    **Identify TOP 5 countries with highest ladder score:**
+
+    ```{r}
+    # Sort the data frame by Ladder_score in descending order
+    sorted_data <- clean_Happy_data[order(-clean_Happy_data$Ladder_score), ]
+
+    # Select the top 5 countries with the highest Ladder_score
+    top_5_countries <- head(sorted_data, 5)
+
+    # View the top 5 countries
+    print("Top 5 happiest countries based on Ladder Score:")
+    print(top_5_countries$Country_name)
+    ```
+
+    #### Analyze Generosity and Perceptions of corruption in Top 5 vs. Bottom 5 Countries
+
+    ```{r}
+    # Select the bottom 5 countries with the lowest Ladder_score
+    bottom_5_countries <- tail(sorted_data, 5)
+
+
+
+    # View the bottom 5 countries
+    print("Bottom 5 countries based on Ladder Score:")
+    print(bottom_5_countries$Country_name)
+
+    # Compare Generosity and Perceptions of corruption
+    top_5_comparison <- top_5_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption")]
+    bottom_5_comparison <- bottom_5_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption")]
+
+    # Print comparison for top 5
+    print("Generosity and Perceptions of Corruption in the Top 5 happiest countries:")
+    print(top_5_comparison)
+
+    # Print comparison for bottom 5
+    print("Generosity and Perceptions of Corruption in the Bottom 5 countries:")
+    print(bottom_5_comparison)
+
+    ```
+
+    ```{r}
+    # Combine top 5 and bottom 5 for comparison
+    comparison_data <- rbind(top_5_countries, bottom_5_countries)
+    comparison_data$Group <- rep(c("Top 5", "Bottom 5"), each = 5)
+    ```
+
+    ```{r}
+    # Plot for Generosity
+    ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Generosity), y = Explained_by_Generosity, fill = Group)) +
+      geom_bar(stat = "identity", position = position_dodge()) +
+      labs(title = "Generosity in Top 5 vs Bottom 5 Happiest Countries", x = "Country", y = "Generosity") +
+      theme_minimal() +
+       theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+      scale_fill_manual(values = c("Top 5" = "blue", "Bottom 5" = "red"))
+    ```
+
+    ```{r}
+    # Plot for Perceptions of Corruption
+    ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Perceptions_of_corruption), y = Explained_by_Perceptions_of_corruption, fill = Group)) +
+      geom_bar(stat = "identity", position = position_dodge()) +
+      labs(title = "Perceptions of Corruption in Top 5 vs Bottom 5 Happiest Countries", x = "Country", y = "Perceptions of Corruption") +
+      theme_minimal() +
+       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      scale_fill_manual(values = c("Top 5" = "blue", "Bottom 5" = "red"))
+    ```
+
+    ### **Perceptions of Corruption Graph Analysis**
+
+    1.  **Lower Corruption in Happier Countries**: The top 5 happiest countries (Denmark, Finland, Sweden, Israel, Iceland) have significantly lower perceptions of corruption compared to the bottom 5 (Afghanistan, Lesotho, Congo (Kinshasa), Sierra Leone, Lebanon). This indicates a trend where higher happiness levels correlate with lower perceived corruption.
+
+    2.  **Uniformity Among Top Countries**: The top 5 countries show a relatively uniform low level of perceived corruption, suggesting a stable and trustworthy public sector which could be contributing to higher happiness scores.
+
+-   **Variability Among Less Happy Countries**: The bottom 5 countries display a wider range of perceptions of corruption. This variability might reflect differing levels of governance and institutional effectiveness, which can affect societal happiness.
+
+    ### **Generosity Graph Analysis**
+
+    1.  **Comparative Generosity**: While both the top 5 and bottom 5 countries show variability in generosity, the top 5 happiest countries generally display higher levels of generosity compared to the bottom 5. This suggests that societal generosity could be associated with greater happiness.
+
+    2.  **High Generosity Even in Less Happy Countries**: Notably, some of the less happy countries (e.g., Congo (Kinshasa) and Sierra Leone) still show significant levels of generosity. This indicates that despite economic or social challenges, cultural or societal norms in these countries may still promote generous behavior.
+
+### **Distribution Analysis**:
+
+-   **What is the distribution of the ‘Ladder score’ across all countries? Is it normally distributed?**
+
+    ```{r}
+
+    # Plot a histogram of Ladder_score
+    hist(clean_Happy_data$Ladder_score, breaks = 20, main = "Histogram of Ladder Scores", xlab = "Ladder Score", col = "blue")
+
+    # Q-Q plot for checking normality
+    qqnorm(clean_Happy_data$Ladder_score, main = "Q-Q Plot of Ladder Scores")
+    qqline(clean_Happy_data$Ladder_score, col = "red", lwd = 2)
+
+    ```
+
+    ### **Histogram Analysis:**
+
+    -   **Shape of Distribution**: The histogram reveals a multi-modal distribution, indicating several peaks instead of one. The most pronounced peak is around a Ladder Score of 6, with smaller peaks around scores of 4 and 7.
+
+    -   **Skewness**: The distribution appears to be slightly left-skewed as there are more scores on the higher end (right side) than on the lower end (left side). This skewness suggests that more countries are clustered around higher happiness scores.
+
+    -   **Implication**: The presence of multiple peaks and slight skewness suggests that the Ladder Score distribution is not perfectly normal but instead shows variability in how happiness is distributed among countries.
+
+    ### **Q-Q Plot Analysis:**
+
+    -   **Linearity**: The Q-Q plot, which plots the quantiles of your Ladder Score data against the quantiles of a theoretical normal distribution, shows a mostly linear pattern, suggesting that the scores are relatively normally distributed.
+
+    -   **Deviations**: However, note the slight deviations from the line at both the lower and higher ends of the distribution. These deviations are typical indicators of the heavy tails in the data — more extreme values (both low and high) than what a normal distribution would predict.
+
+    -   **Normality Assessment**: While the central part of the data closely follows the theoretical line (indicating normality), the deviations at the tails suggest that the distribution is not perfectly normal. This is typical in real-world data, especially with complex phenomena like happiness.
+
+    ### **Conclusion:**
+
+    The **`Ladder Score`** distribution across countries shows characteristics of normality but with notable deviations, particularly in the form of slight skewness and heavier tails. This suggests that while many countries have happiness scores that approximate a normal distribution, there are countries at both ends of the spectrum that deviate from this trend. These findings highlight the complexity of factors influencing national happiness and suggest that multiple modes of happiness exist across different groups or types of countries.
+
+-   **How does the distribution of ‘Healthy life expectancy’ compare to that of ‘Freedom to make life choices’?**
+
+    ```{r}
+    # Create histograms
+
+
+    # Plot histograms for both variables
+    par(mar=c(4, 4, 2, 2)) # Set up the plotting area to have 2 rows and 1 column
+
+    # Histogram for Healthy life expectancy
+    hist(clean_Happy_data$Explained_by_Healthy_life_expectancy, main="Histogram of Healthy Life Expectancy",
+         xlab="Healthy Life Expectancy", col="skyblue", border="black")
+
+    # Histogram for Freedom to make life choices
+    hist(clean_Happy_data$Explained_by_Freedom_to_make_life_choices, main="Histogram of Freedom to Make Life Choices",
+         xlab="Freedom to Make Life Choices", col="lightgreen", border="black")
+
+    ```
+
+    ```{r}
+    # Reset the plotting area
+    par(mfrow=c(1,1))
+
+    # Plot density plots for both variables
+    plot(density(clean_Happy_data$Explained_by_Healthy_life_expectancy), main="Density Comparison",
+         xlab="Value", ylab="Density", col="blue", lwd=2, xlim=c(min(c(clean_Happy_data$Explained_by_Healthy_life_expectancy, clean_Happy_data$Explained_by_Freedom_to_make_life_choices)),
+         max(c(clean_Happy_data$Explained_by_Healthy_life_expectancy, clean_Happy_data$Explained_by_Freedom_to_make_life_choices))))
+    lines(density(clean_Happy_data$Explained_by_Freedom_to_make_life_choices), col="red", lwd=2)
+    legend("topleft", legend=c("Healthy Life Expectancy", "Freedom to Make Life Choices"),
+           col=c("blue", "red"), lty=1, lwd=2)
+    ```
+
+### **Histogram Analysis**
+
+1.  **Healthy Life Expectancy**:
+
+    -   The histogram for **`Healthy Life Expectancy`** is slightly right-skewed, with a major peak around 0.6. This suggests that most countries have a higher value for healthy life expectancy.
+
+    -   The distribution is not uniform and shows concentration in the mid to higher range, indicating variability in how different countries achieve healthy life expectancies.
+
+2.  **Freedom to Make Life Choices**:
+
+    -   In contrast, the histogram for **`Freedom to Make Life Choices`** shows a roughly symmetric distribution with a strong central peak around 0.6 to 0.8. This indicates a clustering of countries where citizens perceive they have substantial freedom in making life choices.
+
+    -   The presence of smaller bars at both the lower and higher ends suggests that while many countries have high freedom, a few countries either have very high or very low perceived freedoms.
+
+### **Density Plot Analysis**
+
+-   **Overlap and Distinction**:
+
+    -   The density plot provides a clearer visualization of how each distribution spreads out and peaks. Both variables share a similar range, but their distributions tell different stories.
+
+    -   **Healthy Life Expectancy** peaks earlier and has a longer tail towards higher values, consistent with the right skew seen in the histogram. This could reflect disparities in health services and outcomes among countries.
+
+    -   **Freedom to Make Life Choices** shows a more bell-shaped curve, peaking later than Healthy Life Expectancy and tapering off more symmetrically. This distribution is closer to normal, suggesting that perceptions of freedom are more uniformly distributed among the countries surveyed.
+
+### **Interpretation and Implications**
+
+-   The comparison highlights that while there is a general global trend towards higher healthy life expectancies and freedom to make life choices, the variation in healthy life expectancy is more pronounced. This might be due to differing healthcare policies, economic conditions, and public health realities.
+
+-   The more uniform distribution of freedom to make life choices might suggest a global convergence towards recognizing and ensuring these freedoms, although extremes still exist.
 
 ## Data source {.unnumbered}
 
 Where does the data come from, who owns the data? Where are all the scripts that you need to clean the data?
 
+I don't remmeber this part.
+
 ## References {.unnumbered}
 
-List all resources you used.
+-   Linear Regression: <https://r-statistics.co/Linear-Regression.html>
+
+-    Pearson Correlation in R: <https://www.geeksforgeeks.org/pearson-correlation-testing-in-r-programming/>
+
+-   Q-Q plot:<https://whitlockschluter3e.zoology.ubc.ca/Tutorials%20using%20R/R_tutorial_Normal_and_sample_means.html>
