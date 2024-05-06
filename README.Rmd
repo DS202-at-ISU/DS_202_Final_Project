@@ -17,8 +17,7 @@ library(dplyr)
 library(readr)
 
 # RAW DATA 
-setwd("/Users/chen/Desktop/DS202Lab/Final_project/")
-happy_score <- read.csv("Happiness_Scores.xls-Sheet1.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
+happy_score <- read.csv("Happiness_Scores.xls-Sheet1.csv")
 head(happy_score)
 ```
 
