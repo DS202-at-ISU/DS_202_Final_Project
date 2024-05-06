@@ -166,23 +166,25 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
 ```
 
--   **`cor()`**: Computes the Pearson correlation coefficient between the two variables. The **`use = "complete.obs"`** argument tells R to use only complete cases, ignoring pairs with missing values.
+-   **Multiple linear regression:**
 
--   **`plot()`**: Generates a scatter plot of the two variables.
+    ```{r}
+    # Fit the multiple linear regression model
+    Mmodel <- lm(Ladder_score ~ Explained_by_Log_GDP_per_capita + Explained_by_Social_support + Explained_by_Healthy_life_expectancy + Explained_by_Freedom_to_make_life_choices + Explained_by_Generosity + Explained_by_Perceptions_of_corruption, data = clean_Happy_data)
 
--   **`lm()`** and **`abline()`**: Fit a linear regression model to the data and plot the regression line, showing the best linear fit through the data points.
 
--   **`grid()`**: Adds a grid to the plot for easier visual analysis.
+    # Summary of the model to see coefficients, R-squared, etc.
+    summary(Mmodel)
+    ```
 
-The Pearson correlation coefficient will give you a numerical value between -1 and 1 where:
+    ```{r}
+    # Fit the multiple linear regression model
+    Mmodel <- lm(Ladder_score ~ Explained_by_Log_GDP_per_capita + Explained_by_Social_support + Explained_by_Healthy_life_expectancy + Explained_by_Freedom_to_make_life_choices + Explained_by_Perceptions_of_corruption, data = clean_Happy_data)
 
--   **1** indicates a perfect positive linear relationship,
 
--   **-1** indicates a perfect negative linear relationship,
-
--   **0** means no linear relationship.
-
-The scatter plot with the regression line will help visually confirm the relationship and see how tightly the data points cluster around the line, which reflects the strength of the correlation.
+    # Summary of the model to see coefficients, R-squared, etc.
+    summary(Mmodel)
+    ```
 
 -   **Strength of Relationship**: A correlation coefficient of 0.81 is quite high, suggesting a strong association between the levels of social support in a country and its reported happiness (Ladder Score).
 
@@ -200,64 +202,74 @@ The scatter plot with the regression line will help visually confirm the relatio
     # Sort the data frame by Ladder_score in descending order
     sorted_data <- clean_Happy_data[order(-clean_Happy_data$Ladder_score), ]
 
-    # Select the top 5 countries with the highest Ladder_score
-    top_5_countries <- head(sorted_data, 5)
+    # Select the top 10 countries with the highest Ladder_score
+    top_10_countries <- head(sorted_data, 10)
 
-    # View the top 5 countries
-    print("Top 5 happiest countries based on Ladder Score:")
-    print(top_5_countries$Country_name)
+    # View the top 10 countries
+    print("Top 10 happiest countries based on Ladder Score:")
+    print(top_10_countries$Country_name)
     ```
 
     #### Analyze Generosity and Perceptions of corruption in Top 5 vs. Bottom 5 Countries
 
     ```{r}
-    # Select the bottom 5 countries with the lowest Ladder_score
-    bottom_5_countries <- tail(sorted_data, 5)
+    # Select the bottom 10 countries with the lowest Ladder_score
+    bottom_10_countries <- tail(sorted_data, 10)
 
 
 
-    # View the bottom 5 countries
-    print("Bottom 5 countries based on Ladder Score:")
-    print(bottom_5_countries$Country_name)
+    # View the bottom 10 countries
+    print("Bottom 10 countries based on Ladder Score:")
+    print(bottom_10_countries$Country_name)
 
     # Compare Generosity and Perceptions of corruption
-    top_5_comparison <- top_5_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption")]
-    bottom_5_comparison <- bottom_5_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption")]
+    top_10_comparison <- top_10_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
+    bottom_10_comparison <- bottom_10_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
 
-    # Print comparison for top 5
-    print("Generosity and Perceptions of Corruption in the Top 5 happiest countries:")
-    print(top_5_comparison)
+    # Print comparison for top 10
+    print("Generosity and Perceptions of Corruption in the Top 10 happiest countries:")
+    print(top_10_comparison)
 
     # Print comparison for bottom 5
-    print("Generosity and Perceptions of Corruption in the Bottom 5 countries:")
-    print(bottom_5_comparison)
+    print("Generosity and Perceptions of Corruption in the Bottom 10 countries:")
+    print(bottom_10_comparison)
 
     ```
 
     ```{r}
     # Combine top 5 and bottom 5 for comparison
-    comparison_data <- rbind(top_5_countries, bottom_5_countries)
-    comparison_data$Group <- rep(c("Top 5", "Bottom 5"), each = 5)
+    comparison_data <- rbind(top_10_countries, bottom_10_countries)
+    comparison_data$Group <- rep(c("Top 10", "Bottom 10"), each = 10)
     ```
 
     ```{r}
     # Plot for Generosity
     ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Generosity), y = Explained_by_Generosity, fill = Group)) +
       geom_bar(stat = "identity", position = position_dodge()) +
-      labs(title = "Generosity in Top 5 vs Bottom 5 Happiest Countries", x = "Country", y = "Generosity") +
+      labs(title = "Generosity in Top 10 vs Bottom 10 Happiest Countries", x = "Country", y = "Generosity") +
       theme_minimal() +
        theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-      scale_fill_manual(values = c("Top 5" = "blue", "Bottom 5" = "red"))
+      scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
     ```
 
     ```{r}
     # Plot for Perceptions of Corruption
     ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Perceptions_of_corruption), y = Explained_by_Perceptions_of_corruption, fill = Group)) +
       geom_bar(stat = "identity", position = position_dodge()) +
-      labs(title = "Perceptions of Corruption in Top 5 vs Bottom 5 Happiest Countries", x = "Country", y = "Perceptions of Corruption") +
+      labs(title = "Perceptions of Corruption in Top 10 vs Bottom 10", x = "Country", y = "Perceptions of Corruption") +
       theme_minimal() +
        theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-      scale_fill_manual(values = c("Top 5" = "blue", "Bottom 5" = "red"))
+      scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
+    ```
+
+    ```{r}
+    # Plot for freedom to make life choices
+    ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Freedom_to_make_life_choices), y = Explained_by_Freedom_to_make_life_choices, fill = Group)) +
+      geom_bar(stat = "identity", position = position_dodge()) +
+      labs(title = "Freedom make life choices in Top 10 vs Bottom 10", x = "Country", y = "Perceptions of Freedom") +
+      theme_minimal() +
+       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
     ```
 
     ### **Perceptions of Corruption Graph Analysis**
