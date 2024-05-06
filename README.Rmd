@@ -95,10 +95,10 @@ clean_Happy_data <- na.omit(happy_score)
 names(clean_Happy_data) <- gsub("\\.+", "_", names(clean_Happy_data))
 
 # Now the column names have underscores instead of dots
-print(names(clean_Happy_data))
+head(names(clean_Happy_data))
 
 # View the cleaned data
-print(clean_Happy_data)
+head(clean_Happy_data)
 
 ```
 
