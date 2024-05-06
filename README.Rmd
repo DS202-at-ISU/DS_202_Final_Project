@@ -299,17 +299,35 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
     ### **Perceptions of Corruption Graph Analysis**
 
-    1.  **Lower Corruption in Happier Countries**: The top 5 happiest countries (Denmark, Finland, Sweden, Israel, Iceland) have significantly lower perceptions of corruption compared to the bottom 5 (Afghanistan, Lesotho, Congo (Kinshasa), Sierra Leone, Lebanon). This indicates a trend where higher happiness levels correlate with lower perceived corruption.
+    1.  **Lower Corruption in Happier Countries**: The top 10 happiest countries (Denmark, Finland, Sweden, Israel, Iceland) have significantly lower perceptions of corruption compared to the bottom 10 (Afghanistan, Lesotho, Congo (Kinshasa), Sierra Leone, Lebanon). This indicates a trend where higher happiness levels correlate with lower perceived corruption.
 
-    2.  **Uniformity Among Top Countries**: The top 5 countries show a relatively uniform low level of perceived corruption, suggesting a stable and trustworthy public sector which could be contributing to higher happiness scores.
+    2.  **Uniformity Among Top Countries**: The top 10 countries show a relatively uniform low level of perceived corruption, suggesting a stable and trustworthy public sector which could be contributing to higher happiness scores.
 
--   **Variability Among Less Happy Countries**: The bottom 5 countries display a wider range of perceptions of corruption. This variability might reflect differing levels of governance and institutional effectiveness, which can affect societal happiness.
+-   **Variability Among Less Happy Countries**: The bottom 10 countries display a wider range of perceptions of corruption. This variability might reflect differing levels of governance and institutional effectiveness, which can affect societal happiness.
 
     ### **Generosity Graph Analysis**
 
-    1.  **Comparative Generosity**: While both the top 5 and bottom 5 countries show variability in generosity, the top 5 happiest countries generally display higher levels of generosity compared to the bottom 5. This suggests that societal generosity could be associated with greater happiness.
+    1.  **Comparative Generosity**: While both the top 10 and bottom 10 countries show variability in generosity, the top 5 happiest countries generally display higher levels of generosity compared to the bottom 5. This suggests that societal generosity could be associated with greater happiness.
 
     2.  **High Generosity Even in Less Happy Countries**: Notably, some of the less happy countries (e.g., Congo (Kinshasa) and Sierra Leone) still show significant levels of generosity. This indicates that despite economic or social challenges, cultural or societal norms in these countries may still promote generous behavior.
+
+    ### **Analysis of the Freedom Graph:**
+
+    1.  **Top 10 Countries (Blue Bars)**:
+
+        -   The top 10 countries show very high levels of perceived freedom to make life choices, with values generally clustering above 0.75.
+
+        -   Countries like Finland, Sweden, Norway, and Denmark (notably Nordic countries) feature prominently, consistent with their strong democratic institutions, high levels of social trust, and comprehensive civil liberties.
+
+        -   The uniformity of high scores in this group suggests a significant role of freedom in their high happiness rankings.
+
+    2.  **Bottom 10 Countries (Red Bars):**
+
+        -   The bottom 10 countries exhibit considerably lower perceptions of freedom compared to the top 10.
+
+        -   The scores decrease progressively among these countries, reaching the lowest with Afghanistan. This group includes countries like Lebanon, Afghanistan, and countries from sub-Saharan Africa like Lesotho and Zimbabwe, which may face significant political, social, or economic challenges.
+
+        -   This gradient and lower levels of perceived freedom may reflect issues such as political instability, economic constraints, or social and cultural restrictions that impact individual freedoms.
 
 ### **Distribution Analysis**:
 
