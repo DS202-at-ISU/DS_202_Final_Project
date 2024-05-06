@@ -28,22 +28,15 @@ This repository serves as a starter repo for your final project, and this Rmd is
 
 Authors: Cassandra Larsen, Chen Sang
 
-## Abstract ??? dk if we actually need it {.unnumbered}
-
-An abstract is a quick summary of your work. Ideally it should motivate someone to read the rest of the paper. Include one sentence each on
-
--   what is the project about?
-    -   Since we are graduating soon, and we would like to find out the country that with the highest ladder score
--   what is the motivation for doing it?
-    -   so that we can move there in order to save my mental health
--   what data is your work based on? and where does it come from? = what are your main findings? (one sentence each)
-    -   ?????
-
 # Intro
 
-The goal of this project is to finding the best countries to live and analyzing what factors contributed to the ladder score the most and the least.
+The goal of this project was to find out what varibles impacted the ladder score, which is this data's indicator of a happines score. We were intrested in this topic as we are trying to find out where we wish to possibly move after the conculsion of our undergraduate degree for either a job or for a more advnced degree. We looked into the best countries to live in terms of having the happiest citizens and analyzing what factors contributed to the ladder score the most and the least, as well as looking into trends in these varibles thatg impact the laterscore
 
 In pursuit of the stated goal, we will explore the following questions:
+
+#### **Gerneal Analysis:**
+
+-   What variable(s) have the largest impact on ladder score that are also statistically significant?
 
 #### **Trend Analysis:**
 
@@ -55,7 +48,7 @@ In pursuit of the stated goal, we will explore the following questions:
 
 -   Which countries have the highest ‘Ladder score’?
 
--   How do factors like ‘Generosity’ and ‘Perceptions of corruption’ vary among the top 5 happiest countries compared to the bottom 5?
+-   How do factors like ‘Generosity’ and ‘Perceptions of corruption’ vary among the top 10 happiest countries compared to the bottom 10?
 
 **Distribution Analysis**:
 
