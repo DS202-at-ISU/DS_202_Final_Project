@@ -10,25 +10,17 @@ this Rmd is supposed to serve as a starter file for your project report.
 
 Authors: Cassandra Larsen, Chen Sang
 
-## Abstract ??? dk if we actually need it
-
-An abstract is a quick summary of your work. Ideally it should motivate
-someone to read the rest of the paper. Include one sentence each on
-
-- what is the project about?
-  - Since we are graduating soon, and we would like to find out the
-    country that with the highest ladder score
-- what is the motivation for doing it?
-  - so that we can move there in order to save my mental health
-- what data is your work based on? and where does it come from? = what
-  are your main findings? (one sentence each)
-  - ?????
-
 # Intro
 
-The goal of this project is to finding the best countries to live and
-analyzing what factors contributed to the ladder score the most and the
-least.
+The goal of this project was to find out what varibles impacted the
+ladder score, which is this data’s indicator of a happines score. We
+were intrested in this topic as we are trying to find out where we wish
+to possibly move after the conculsion of our undergraduate degree for
+either a job or for a more advnced degree. We looked into the best
+countries to live in terms of having the happiest citizens and analyzing
+what factors contributed to the ladder score the most and the least, as
+well as looking into trends in these varibles thatg impact the
+laterscore
 
 In pursuit of the stated goal, we will explore the following questions:
 
@@ -39,12 +31,15 @@ In pursuit of the stated goal, we will explore the following questions:
 
 - Does ‘Social support’ correlate strongly with the ‘Ladder score’?
 
+- What variable(s) have the largest impact on ladder score that are also
+  statistically significant?
+
 **Comparative Analysis**:
 
 - Which countries have the highest ‘Ladder score’?
 
 - How do factors like ‘Generosity’ and ‘Perceptions of corruption’ vary
-  among the top 5 happiest countries compared to the bottom 5?
+  among the top 10 happiest countries compared to the bottom 10?
 
 **Distribution Analysis**:
 
@@ -54,21 +49,17 @@ In pursuit of the stated goal, we will explore the following questions:
 - How does the distribution of ‘Healthy life expectancy’ compare to that
   of ‘Freedom to make life choices’?
 
-Those are the questions we would like to explore in order to achieve the
-goal and gain insightful thoughts.
-
 # Quick Data Summary
 
-What are the variables that you will be using in the main part of the
-report? What are their ranges? You could include a table with variable
-names, a short explanation, and (very broad) summary statistics.
+**Relevant Variables from Dataset**:
 
-- Ladder_score: ladder score of each country
+- Ladder_score: ladder score of each country which is this data’s
+  happiness score
 
 - Explained_by_Log_GDP_per_capita: measure of a country’s economic
   output that accounts for its number of people
 
-- Country_name: countries name
+- Country_name: country’s name
 
 - Explained_by_Social_support: interpersonal connections and community
   resources contribute to individual and collective well-being.
@@ -201,6 +192,8 @@ head(clean_Happy_data)
 
   ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
+- Results
+
   - **Positive Relationship**: There’s a clear positive correlation
     between Log GDP per Capita and Ladder Score. This suggests that as
     the economic output per capita increases, the happiness score tends
@@ -221,11 +214,11 @@ head(clean_Happy_data)
     (p-values \< 2.2e-16), indicating a very low probability that these
     results are due to random chance.
 
-**Does ‘Social support’ correlate strongly with the ‘Ladder score’?**
+- **Does ‘Social support’ correlate strongly with the ‘Ladder score’?**
 
-- Pearson correlation coefficient, which quantifies the strength and
-  direction of the relationship, and to create a scatter plot with a
-  regression line to visually assess the relationship.
+  - Pearson correlation coefficient, which quantifies the strength and
+    direction of the relationship, and to create a scatter plot with a
+    regression line to visually assess the relationship.
 
 ``` r
 # Calculate Pearson correlation coefficient
@@ -253,7 +246,21 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-- **Multiple linear regression:**
+- Results
+
+  - **Strength of Relationship**: A correlation coefficient of 0.81 is
+    quite high, suggesting a strong association between the levels of
+    social support in a country and its reported happiness (Ladder
+    Score).
+
+  - **Direction of Relationship**: Since the correlation coefficient is
+    positive, it means that as social support increases, the Ladder
+    Score generally increases as well. This implies that countries with
+    higher levels of social support tend to have higher happiness
+    scores.
+
+- **What variable(s) have the largest impact on ladder score that are
+  also statistically significant?**
 
   ``` r
   # Fit the multiple linear regression model
@@ -299,6 +306,45 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       ## Multiple R-squared:  0.8194, Adjusted R-squared:  0.8113 
       ## F-statistic: 100.6 on 6 and 133 DF,  p-value: < 2.2e-16
 
+- **Coefficients Analysis**
+
+  - **(Intercept) (1.1704)**: The expected value of **Ladder_score**
+    when all other variables are zero, which is typically a theoretical
+    scenario in this context.
+
+  - **Explained_by_Log_GDP_per_capita (0.4415, p = 0.03631)**: Indicates
+    a positive and significant association with the ladder score. Higher
+    GDP per capita (logged) is associated with higher happiness scores,
+    although the p-value is close to 0.05, suggesting a weaker
+    significance compared to other variables.
+
+  - **Explained_by_Social_support (1.4384, p = 3.25e-10)**: Shows a
+    strong positive impact on happiness scores. This variable is highly
+    significant, emphasizing the importance of social support in
+    contributing to happiness.
+
+  - **Explained_by_Healthy_life_expectancy (1.3825, p = 0.00593)**: Also
+    significantly positive, indicating that longer healthy life
+    expectancies are closely associated with higher happiness scores.
+
+  - **Explained_by_Freedom_to_make_life_choices (1.8968, p =
+    3.27e-08)**: One of the strongest predictors, suggesting that
+    freedom in making life choices is a crucial determinant of
+    happiness.
+
+  - **Explained_by_Generosity (0.4621, p = 0.46776)**: Not a significant
+    predictor in this model, indicating that generosity does not have a
+    statistically significant effect on the ladder score within the
+    scope of this dataset.
+
+  - **Explained_by_Perceptions_of_corruption (1.0072, p = 0.01516)**:
+    This is significant, suggesting that perceptions of corruption
+    negatively affect happiness scores, where less perceived corruption
+    is associated with higher happiness.
+
+- As generosity was not statistically significant it was removed and we
+  re-ran the model.
+
   ``` r
   # Fit the multiple linear regression model
   Mmodel <- lm(Ladder_score ~ Explained_by_Log_GDP_per_capita + Explained_by_Social_support + Explained_by_Healthy_life_expectancy + Explained_by_Freedom_to_make_life_choices + Explained_by_Perceptions_of_corruption, data = clean_Happy_data)
@@ -341,23 +387,48 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       ## Multiple R-squared:  0.8187, Adjusted R-squared:  0.812 
       ## F-statistic:   121 on 5 and 134 DF,  p-value: < 2.2e-16
 
-- **Strength of Relationship**: A correlation coefficient of 0.81 is
-  quite high, suggesting a strong association between the levels of
-  social support in a country and its reported happiness (Ladder Score).
+- **Analysis of Coefficients**
 
-- **Direction of Relationship**: Since the correlation coefficient is
-  positive, it means that as social support increases, the Ladder Score
-  generally increases as well. This implies that countries with higher
-  levels of social support tend to have higher happiness scores.
+  - **Intercept (1.2206)**: The base level of the **Ladder_score** when
+    all other predictors are zero. This is an abstract concept since the
+    predictors are not likely to be zero in real scenarios.
+
+  - **Explained_by_Log_GDP_per_capita (Coefficient = 0.4066, p-value =
+    0.04701)**: This suggests that for every one-unit increase in the
+    logarithm of GDP per capita, the **Ladder_score** increases by
+    approximately 0.407 units, assuming other factors are held constant.
+    The p-value is close to 0.05, making this predictor marginally
+    significant.
+
+  - **Explained_by_Social_support (Coefficient = 1.4588, p-value =
+    1.32e-10)**: A highly significant predictor. An increase in social
+    support is strongly associated with an increase in happiness scores,
+    more so than GDP per capita.
+
+  - **Explained_by_Healthy_life_expectancy (Coefficient = 1.3939,
+    p-value = 0.00544)**: Also a significant predictor. It indicates
+    that longer healthy life expectancy is associated with higher
+    happiness scores.
+
+  - **Explained_by_Freedom_to_make_life_choices (Coefficient = 1.9406,
+    p-value = 9.44e-09)**: This shows a strong positive association with
+    **Ladder_score**. It implies that greater freedom in making life
+    choices significantly boosts happiness, even more strongly than
+    social support.
+
+  - **Explained_by_Perceptions_of_corruption (Coefficient = 1.0669,
+    p-value = 0.00865)**: This variable is significant, suggesting that
+    lower perceptions of corruption are associated with higher happiness
+    scores.
 
 ### **Comparative Analysis**:
 
 - **Which countries have the highest ‘Ladder score’?**
 
 - **How do factors like ‘Generosity’ and ‘Perceptions of corruption’
-  vary among the top 5 happiest countries compared to the bottom 5?**
+  vary among the top 10 happiest countries compared to the bottom 10?**
 
-  **Identify TOP 5 countries with highest ladder score:**
+  **Identify TOP 10 countries with highest ladder score:**
 
   ``` r
   # Sort the data frame by Ladder_score in descending order
@@ -638,7 +709,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
   # Histogram for Healthy life expectancy
   hist(clean_Happy_data$Explained_by_Healthy_life_expectancy, main="Histogram of Healthy Life Expectancy",
-       xlab="Healthy Life Expectancy", col="skyblue", border="black")
+       xlab="Healthy Life Expectancy", col="blue", border="black")
   ```
 
   ![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
@@ -646,7 +717,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
   ``` r
   # Histogram for Freedom to make life choices
   hist(clean_Happy_data$Explained_by_Freedom_to_make_life_choices, main="Histogram of Freedom to Make Life Choices",
-       xlab="Freedom to Make Life Choices", col="lightgreen", border="black")
+       xlab="Freedom to Make Life Choices", col="red", border="black")
   ```
 
   ![](README_files/figure-gfm/unnamed-chunk-15-2.png)<!-- -->
@@ -734,6 +805,17 @@ Gallup, the Oxford Wellbeing Research Centre, the UN Sustainable
 Development Solutions Network, and the WHR’s Editorial Board. It is also
 important to note that the report is produced under the editorial
 control of the WHR Editorial Board.
+
+## Conclusion
+
+While working on this project it was realized that this report only
+includes a small number of variables that interpret happiness and it is
+a generalization across each country citizen’s. Therefore, things that
+might make one individual happy might not make another. With this in
+mind it is necessary to consider other relevant factors to you before
+making an informed decision on where you might wish to move, such as
+racism, homophobia climate, visas, etc. before deciding to moving
+anywhere.
 
 ## References
 
