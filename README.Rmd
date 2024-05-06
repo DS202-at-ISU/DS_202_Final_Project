@@ -375,12 +375,14 @@ The scatter plot with the regression line will help visually confirm the relatio
 
 Where does the data come from, who owns the data? Where are all the scripts that you need to clean the data?
 
-I don't remmeber this part.
+Data Source: <https://worldhappiness.report/data/>
+
+The data used is the 2024 data for Figure 2.1. The World Happiness Report, from which this data originates is, is a partnership between Gallup, the Oxford Wellbeing Research Centre, the UN Sustainable Development Solutions Network, and the WHR’s Editorial Board. It is also important to note that the report is produced under the editorial control of the WHR Editorial Board.
 
 ## References {.unnumbered}
 
 -   Linear Regression: <https://r-statistics.co/Linear-Regression.html>
 
--    Pearson Correlation in R: <https://www.geeksforgeeks.org/pearson-correlation-testing-in-r-programming/>
+-   Pearson Correlation in R: <https://www.geeksforgeeks.org/pearson-correlation-testing-in-r-programming/>
 
 -   Q-Q plot:<https://whitlockschluter3e.zoology.ubc.ca/Tutorials%20using%20R/R_tutorial_Normal_and_sample_means.html>
