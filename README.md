@@ -162,18 +162,18 @@ head(clean_Happy_data)
       ## 
       ## Residuals:
       ##      Min       1Q   Median       3Q      Max 
-      ## -2.82003 -0.37094  0.05679  0.40998  3.02053 
+      ## -2.81221 -0.35486  0.06285  0.42074  1.53252 
       ## 
       ## Coefficients:
       ##                                 Estimate Std. Error t value Pr(>|t|)    
-      ## (Intercept)                       2.5865     0.2183   11.85   <2e-16 ***
-      ## Explained_by_Log_GDP_per_capita   2.1355     0.1514   14.11   <2e-16 ***
+      ## (Intercept)                       2.4252     0.2112   11.48   <2e-16 ***
+      ## Explained_by_Log_GDP_per_capita   2.2469     0.1455   15.44   <2e-16 ***
       ## ---
       ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
       ## 
-      ## Residual standard error: 0.7585 on 138 degrees of freedom
-      ## Multiple R-squared:  0.5906, Adjusted R-squared:  0.5876 
-      ## F-statistic: 199.1 on 1 and 138 DF,  p-value: < 2.2e-16
+      ## Residual standard error: 0.692 on 136 degrees of freedom
+      ## Multiple R-squared:  0.6368, Adjusted R-squared:  0.6342 
+      ## F-statistic: 238.5 on 1 and 136 DF,  p-value: < 2.2e-16
 
   ``` r
   # Plotting the data points
@@ -206,7 +206,7 @@ head(clean_Happy_data)
     there are also other factors that influence happiness since the
     points are not perfectly aligned along the line. This is consistent
     with the R-squared value from your regression summary (approximately
-    0.59), indicating that around 59% of the variation in Ladder Score
+    0.63), indicating that around 63% of the variation in Ladder Score
     can be explained by GDP per capita.
 
   - **Statistical Significance**: The regression coefficients for the
@@ -226,7 +226,7 @@ correlation <- cor(clean_Happy_data$Explained_by_Social_support, clean_Happy_dat
 print(paste("Pearson correlation coefficient between Social Support and Ladder Score is:", correlation))
 ```
 
-    ## [1] "Pearson correlation coefficient between Social Support and Ladder Score is: 0.813542001508389"
+    ## [1] "Pearson correlation coefficient between Social Support and Ladder Score is: 0.798276334164571"
 
 ``` r
 # Plotting the data points
@@ -248,7 +248,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
 - Results
 
-  - **Strength of Relationship**: A correlation coefficient of 0.81 is
+  - **Strength of Relationship**: A correlation coefficient of 0.79 is
     quite high, suggesting a strong association between the levels of
     social support in a country and its reported happiness (Ladder
     Score).
@@ -280,70 +280,69 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       ## 
       ## Residuals:
       ##      Min       1Q   Median       3Q      Max 
-      ## -1.58289 -0.23652  0.06039  0.33626  1.15072 
+      ## -1.55996 -0.25510  0.07507  0.34460  1.13742 
       ## 
       ## Coefficients:
       ##                                           Estimate Std. Error t value Pr(>|t|)
-      ## (Intercept)                                 1.1704     0.2069   5.656 9.07e-08
-      ## Explained_by_Log_GDP_per_capita             0.4415     0.2088   2.115  0.03631
-      ## Explained_by_Social_support                 1.4384     0.2116   6.798 3.25e-10
-      ## Explained_by_Healthy_life_expectancy        1.3825     0.4943   2.797  0.00593
-      ## Explained_by_Freedom_to_make_life_choices   1.8968     0.3231   5.871 3.27e-08
-      ## Explained_by_Generosity                     0.4621     0.6345   0.728  0.46776
-      ## Explained_by_Perceptions_of_corruption      1.0072     0.4094   2.460  0.01516
+      ## (Intercept)                                 1.1498     0.2197   5.234 6.43e-07
+      ## Explained_by_Log_GDP_per_capita             0.6743     0.2493   2.705  0.00774
+      ## Explained_by_Social_support                 1.2945     0.2279   5.682 8.25e-08
+      ## Explained_by_Healthy_life_expectancy        1.1056     0.5219   2.118  0.03604
+      ## Explained_by_Freedom_to_make_life_choices   1.9041     0.3322   5.731 6.53e-08
+      ## Explained_by_Generosity                     0.5416     0.6339   0.854  0.39447
+      ## Explained_by_Perceptions_of_corruption      0.9118     0.4129   2.208  0.02898
       ##                                              
       ## (Intercept)                               ***
-      ## Explained_by_Log_GDP_per_capita           *  
+      ## Explained_by_Log_GDP_per_capita           ** 
       ## Explained_by_Social_support               ***
-      ## Explained_by_Healthy_life_expectancy      ** 
+      ## Explained_by_Healthy_life_expectancy      *  
       ## Explained_by_Freedom_to_make_life_choices ***
       ## Explained_by_Generosity                      
       ## Explained_by_Perceptions_of_corruption    *  
       ## ---
       ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
       ## 
-      ## Residual standard error: 0.5131 on 133 degrees of freedom
-      ## Multiple R-squared:  0.8194, Adjusted R-squared:  0.8113 
-      ## F-statistic: 100.6 on 6 and 133 DF,  p-value: < 2.2e-16
+      ## Residual standard error: 0.5113 on 131 degrees of freedom
+      ## Multiple R-squared:  0.809,  Adjusted R-squared:  0.8003 
+      ## F-statistic:  92.5 on 6 and 131 DF,  p-value: < 2.2e-16
 
 - **Coefficients Analysis**
 
-  - **(Intercept) (1.1704)**: The expected value of **Ladder_score**
-    when all other variables are zero, which is typically a theoretical
-    scenario in this context.
+  - **Intercept (1.1498)**: The baseline value of **`Ladder_score`**
+    when all predictors are at zero, which is not practically
+    interpretable in this context but necessary for the model.
 
-  - **Explained_by_Log_GDP_per_capita (0.4415, p = 0.03631)**: Indicates
-    a positive and significant association with the ladder score. Higher
-    GDP per capita (logged) is associated with higher happiness scores,
-    although the p-value is close to 0.05, suggesting a weaker
-    significance compared to other variables.
+  - **Explained_by_Log_GDP_per_capita (0.6743)**: For every one-unit
+    increase in the logarithmic GDP per capita, the **`Ladder_score`**
+    increases by 0.6743, assuming all other variables are held constant.
+    It’s statistically significant (p = 0.00774).
 
-  - **Explained_by_Social_support (1.4384, p = 3.25e-10)**: Shows a
-    strong positive impact on happiness scores. This variable is highly
-    significant, emphasizing the importance of social support in
-    contributing to happiness.
+  - **Explained_by_Social_support (1.2945)**: This has a very positive
+    and strong impact on happiness, as indicated by its coefficient and
+    highly significant p-value (8.25e-08). It underscores the importance
+    of social support in predicting happiness.
 
-  - **Explained_by_Healthy_life_expectancy (1.3825, p = 0.00593)**: Also
-    significantly positive, indicating that longer healthy life
-    expectancies are closely associated with higher happiness scores.
+  - **Explained_by_Healthy_life_expectancy (1.1056)**: This variable is
+    also significantly associated with **`Ladder_score`** (p = 0.03604).
+    Higher life expectancy at birth contributes positively to the
+    happiness score.
 
-  - **Explained_by_Freedom_to_make_life_choices (1.8968, p =
-    3.27e-08)**: One of the strongest predictors, suggesting that
-    freedom in making life choices is a crucial determinant of
-    happiness.
+  - **Explained_by_Freedom_to_make_life_choices (1.9041)**: This shows a
+    strong positive correlation with **`Ladder_score`** and is highly
+    significant (p = 6.53e-08), highlighting the value of personal
+    autonomy in contributing to happiness.
 
-  - **Explained_by_Generosity (0.4621, p = 0.46776)**: Not a significant
-    predictor in this model, indicating that generosity does not have a
-    statistically significant effect on the ladder score within the
-    scope of this dataset.
+  - **Explained_by_Generosity (0.5416)**: Its impact on happiness is
+    positive but not statistically significant (p = 0.39447), suggesting
+    that within this model and dataset, generosity alone isn’t a strong
+    predictor of happiness.
 
-  - **Explained_by_Perceptions_of_corruption (1.0072, p = 0.01516)**:
-    This is significant, suggesting that perceptions of corruption
-    negatively affect happiness scores, where less perceived corruption
-    is associated with higher happiness.
+  - **Explained_by_Perceptions_of_corruption (0.9118)**: A significant
+    predictor (p = 0.02898), suggesting that lower perceptions of
+    corruption correlate with higher happiness scores.
 
-- As generosity was not statistically significant it was removed and we
-  re-ran the model.
+- **As generosity was not statistically significant it was removed and
+  we re-ran the model.**
 
   ``` r
   # Fit the multiple linear regression model
@@ -363,62 +362,60 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       ## 
       ## Residuals:
       ##      Min       1Q   Median       3Q      Max 
-      ## -1.57721 -0.21352  0.06809  0.34306  1.14160 
+      ## -1.55418 -0.23186  0.06614  0.32536  1.12725 
       ## 
       ## Coefficients:
       ##                                           Estimate Std. Error t value Pr(>|t|)
-      ## (Intercept)                                 1.2206     0.1948   6.267 4.68e-09
-      ## Explained_by_Log_GDP_per_capita             0.4066     0.2028   2.005  0.04701
-      ## Explained_by_Social_support                 1.4588     0.2094   6.968 1.32e-10
-      ## Explained_by_Healthy_life_expectancy        1.3939     0.4932   2.826  0.00544
-      ## Explained_by_Freedom_to_make_life_choices   1.9406     0.3168   6.125 9.44e-09
-      ## Explained_by_Perceptions_of_corruption      1.0669     0.4004   2.665  0.00865
+      ## (Intercept)                                 1.2091     0.2082   5.807 4.51e-08
+      ## Explained_by_Log_GDP_per_capita             0.6252     0.2423   2.580   0.0110
+      ## Explained_by_Social_support                 1.3235     0.2251   5.880 3.18e-08
+      ## Explained_by_Healthy_life_expectancy        1.1289     0.5207   2.168   0.0319
+      ## Explained_by_Freedom_to_make_life_choices   1.9548     0.3265   5.986 1.91e-08
+      ## Explained_by_Perceptions_of_corruption      0.9849     0.4036   2.440   0.0160
       ##                                              
       ## (Intercept)                               ***
       ## Explained_by_Log_GDP_per_capita           *  
       ## Explained_by_Social_support               ***
-      ## Explained_by_Healthy_life_expectancy      ** 
+      ## Explained_by_Healthy_life_expectancy      *  
       ## Explained_by_Freedom_to_make_life_choices ***
-      ## Explained_by_Perceptions_of_corruption    ** 
+      ## Explained_by_Perceptions_of_corruption    *  
       ## ---
       ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
       ## 
-      ## Residual standard error: 0.5122 on 134 degrees of freedom
-      ## Multiple R-squared:  0.8187, Adjusted R-squared:  0.812 
-      ## F-statistic:   121 on 5 and 134 DF,  p-value: < 2.2e-16
+      ## Residual standard error: 0.5108 on 132 degrees of freedom
+      ## Multiple R-squared:  0.808,  Adjusted R-squared:  0.8007 
+      ## F-statistic: 111.1 on 5 and 132 DF,  p-value: < 2.2e-16
 
 - **Analysis of Coefficients**
 
-  - **Intercept (1.2206)**: The base level of the **Ladder_score** when
-    all other predictors are zero. This is an abstract concept since the
-    predictors are not likely to be zero in real scenarios.
+  - **Intercept (1.2091)**: This is the predicted value of the ladder
+    score when all independent variables are zero. Since these variables
+    represent significant social and economic metrics, a zero value
+    isn’t practically feasible, but this value is necessary for the
+    model’s calculations.
 
-  - **Explained_by_Log_GDP_per_capita (Coefficient = 0.4066, p-value =
-    0.04701)**: This suggests that for every one-unit increase in the
-    logarithm of GDP per capita, the **Ladder_score** increases by
-    approximately 0.407 units, assuming other factors are held constant.
-    The p-value is close to 0.05, making this predictor marginally
-    significant.
+  - **Explained_by_Log_GDP_per_capita (0.6252, p = 0.0110)**: A
+    significant predictor suggesting that higher GDP per capita (logged)
+    is associated with a higher happiness score. The p-value indicates
+    that this result is statistically significant at the 5% level.
 
-  - **Explained_by_Social_support (Coefficient = 1.4588, p-value =
-    1.32e-10)**: A highly significant predictor. An increase in social
-    support is strongly associated with an increase in happiness scores,
-    more so than GDP per capita.
+  - **Explained_by_Social_support (1.3235, p = 3.18e-08)**: One of the
+    strongest predictors in the model, indicating that social support
+    significantly boosts happiness. The very low p-value underscores its
+    statistical significance.
 
-  - **Explained_by_Healthy_life_expectancy (Coefficient = 1.3939,
-    p-value = 0.00544)**: Also a significant predictor. It indicates
-    that longer healthy life expectancy is associated with higher
-    happiness scores.
+  - **Explained_by_Healthy_life_expectancy (1.1289, p = 0.0319)**: This
+    coefficient is statistically significant, showing that longer
+    healthy life expectancy is associated with higher happiness scores.
 
-  - **Explained_by_Freedom_to_make_life_choices (Coefficient = 1.9406,
-    p-value = 9.44e-09)**: This shows a strong positive association with
-    **Ladder_score**. It implies that greater freedom in making life
-    choices significantly boosts happiness, even more strongly than
-    social support.
+  - **Explained_by_Freedom_to_make_life_choices (1.9548, p =
+    1.91e-08)**: The highest coefficient among the predictors, strongly
+    indicating that freedom in making life choices is crucial for
+    happiness. The significance level is very high.
 
-  - **Explained_by_Perceptions_of_corruption (Coefficient = 1.0669,
-    p-value = 0.00865)**: This variable is significant, suggesting that
-    lower perceptions of corruption are associated with higher happiness
+  - **Explained_by_Perceptions_of_corruption (0.9849, p = 0.0160)**:
+    Also a significant predictor, suggesting that better perceptions (or
+    lower levels) of corruption are associated with higher happiness
     scores.
 
 ### **Comparative Analysis**:
@@ -428,76 +425,103 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 - **How do factors like ‘Generosity’ and ‘Perceptions of corruption’
   vary among the top 10 happiest countries compared to the bottom 10?**
 
+  Add United State in the top 10 countries:
+
+  ``` r
+  us_data <- clean_Happy_data[clean_Happy_data$Country_name == "United States", ]
+
+  # View the extracted data
+  print(us_data)
+  ```
+
+      ##     Country_name Ladder_score upperwhisker lowerwhisker
+      ## 23 United States        6.725        6.818        6.631
+      ##    Explained_by_Log_GDP_per_capita Explained_by_Social_support
+      ## 23                           1.939                       1.392
+      ##    Explained_by_Healthy_life_expectancy
+      ## 23                                0.542
+      ##    Explained_by_Freedom_to_make_life_choices Explained_by_Generosity
+      ## 23                                     0.586                   0.223
+      ##    Explained_by_Perceptions_of_corruption Dystopia_residual
+      ## 23                                  0.169             1.873
+
   **Identify TOP 10 countries with highest ladder score:**
 
   ``` r
   # Sort the data frame by Ladder_score in descending order
   sorted_data <- clean_Happy_data[order(-clean_Happy_data$Ladder_score), ]
 
-  # Select the top 10 countries with the highest Ladder_score
+  # Select the top 11 countries with the highest Ladder_score
   top_10_countries <- head(sorted_data, 10)
 
-  # View the top 10 countries
-  print("Top 10 happiest countries based on Ladder Score:")
+  # Add United State to Top 11 countries
+  top_11_countries <- rbind(top_10_countries, us_data)
+
+  top_11_countries <- top_11_countries[!duplicated(top_11_countries$Country_name), ]
+
+  # View the top 11 countries with USA
+  print("Top 11 happiest countries based on Ladder Score:")
   ```
 
-      ## [1] "Top 10 happiest countries based on Ladder Score:"
+      ## [1] "Top 11 happiest countries based on Ladder Score:"
 
   ``` r
-  print(top_10_countries$Country_name)
+  print(top_11_countries$Country_name)
   ```
 
-      ##  [1] "Finland"     "Denmark"     "Iceland"     "Sweden"      "Israel"     
-      ##  [6] "Netherlands" "Norway"      "Luxembourg"  "Switzerland" "Australia"
+      ##  [1] "Finland"       "Denmark"       "Iceland"       "Sweden"       
+      ##  [5] "Israel"        "Netherlands"   "Norway"        "Luxembourg"   
+      ##  [9] "Switzerland"   "Australia"     "United States"
 
-  #### Analyze Generosity and Perceptions of corruption in Top 5 vs. Bottom 5 Countries
+  #### Analyze Generosity and Perceptions of corruption in Top 10 vs. Bottom 10 Countries
 
   ``` r
-  # Select the bottom 10 countries with the lowest Ladder_score
-  bottom_10_countries <- tail(sorted_data, 10)
+  # Select the bottom 11 countries with the lowest Ladder_score
+  bottom_11_countries <- tail(sorted_data, 11)
 
 
 
-  # View the bottom 10 countries
-  print("Bottom 10 countries based on Ladder Score:")
+  # View the bottom 11 countries
+  print("Bottom 11 countries based on Ladder Score:")
   ```
 
-      ## [1] "Bottom 10 countries based on Ladder Score:"
+      ## [1] "Bottom 11 countries based on Ladder Score:"
 
   ``` r
-  print(bottom_10_countries$Country_name)
+  print(bottom_11_countries$Country_name)
   ```
 
-      ##  [1] "Zambia"           "Eswatini"         "Malawi"           "Botswana"        
-      ##  [5] "Zimbabwe"         "Congo (Kinshasa)" "Sierra Leone"     "Lesotho"         
-      ##  [9] "Lebanon"          "Afghanistan"
+      ##  [1] "Comoros"          "Yemen"            "Zambia"           "Eswatini"        
+      ##  [5] "Malawi"           "Botswana"         "Zimbabwe"         "Congo (Kinshasa)"
+      ##  [9] "Sierra Leone"     "Lesotho"          "Lebanon"
 
   ``` r
   # Compare Generosity and Perceptions of corruption
-  top_10_comparison <- top_10_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
-  bottom_10_comparison <- bottom_10_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
+  top_11_comparison <- top_11_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
+  bottom_11_comparison <- bottom_11_countries[, c("Country_name", "Explained_by_Generosity", "Explained_by_Perceptions_of_corruption", "Explained_by_Freedom_to_make_life_choices")]
 
-  # Print comparison for top 10
-  print("Generosity and Perceptions of Corruption in the Top 10 happiest countries:")
+  # Print comparison for top 11
+  print("Generosity and Perceptions of Corruption in the Top 11 happiest countries:")
   ```
 
-      ## [1] "Generosity and Perceptions of Corruption in the Top 10 happiest countries:"
+      ## [1] "Generosity and Perceptions of Corruption in the Top 11 happiest countries:"
 
   ``` r
-  print(top_10_comparison)
+  print(top_11_comparison)
   ```
 
-      ##    Country_name Explained_by_Generosity Explained_by_Perceptions_of_corruption
-      ## 1       Finland                   0.142                                  0.546
-      ## 2       Denmark                   0.204                                  0.548
-      ## 3       Iceland                   0.258                                  0.182
-      ## 4        Sweden                   0.221                                  0.524
-      ## 5        Israel                   0.153                                  0.193
-      ## 6   Netherlands                   0.247                                  0.372
-      ## 7        Norway                   0.224                                  0.484
-      ## 8    Luxembourg                   0.146                                  0.432
-      ## 9   Switzerland                   0.173                                  0.498
-      ## 10    Australia                   0.225                                  0.323
+      ##     Country_name Explained_by_Generosity Explained_by_Perceptions_of_corruption
+      ## 1        Finland                   0.142                                  0.546
+      ## 2        Denmark                   0.204                                  0.548
+      ## 3        Iceland                   0.258                                  0.182
+      ## 4         Sweden                   0.221                                  0.524
+      ## 5         Israel                   0.153                                  0.193
+      ## 6    Netherlands                   0.247                                  0.372
+      ## 7         Norway                   0.224                                  0.484
+      ## 8     Luxembourg                   0.146                                  0.432
+      ## 9    Switzerland                   0.173                                  0.498
+      ## 10     Australia                   0.225                                  0.323
+      ## 23 United States                   0.223                                  0.169
       ##    Explained_by_Freedom_to_make_life_choices
       ## 1                                      0.859
       ## 2                                      0.823
@@ -509,119 +533,123 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       ## 8                                      0.801
       ## 9                                      0.759
       ## 10                                     0.756
+      ## 23                                     0.586
 
   ``` r
-  # Print comparison for bottom 5
-  print("Generosity and Perceptions of Corruption in the Bottom 10 countries:")
+  # Print comparison for bottom 11
+  print("Generosity and Perceptions of Corruption in the Bottom 11 countries:")
   ```
 
-      ## [1] "Generosity and Perceptions of Corruption in the Bottom 10 countries:"
+      ## [1] "Generosity and Perceptions of Corruption in the Bottom 11 countries:"
 
   ``` r
-  print(bottom_10_comparison)
+  print(bottom_11_comparison)
   ```
 
       ##         Country_name Explained_by_Generosity
-      ## 134           Zambia                   0.168
-      ## 135         Eswatini                   0.059
-      ## 136           Malawi                   0.135
-      ## 137         Botswana                   0.014
-      ## 138         Zimbabwe                   0.096
-      ## 139 Congo (Kinshasa)                   0.189
-      ## 140     Sierra Leone                   0.181
-      ## 141          Lesotho                   0.082
-      ## 142          Lebanon                   0.068
-      ## 143      Afghanistan                   0.091
+      ## 131          Comoros                   0.128
+      ## 132            Yemen                   0.080
+      ## 133           Zambia                   0.168
+      ## 134         Eswatini                   0.059
+      ## 135           Malawi                   0.135
+      ## 136         Botswana                   0.014
+      ## 137         Zimbabwe                   0.096
+      ## 138 Congo (Kinshasa)                   0.189
+      ## 139     Sierra Leone                   0.181
+      ## 140          Lesotho                   0.082
+      ## 141          Lebanon                   0.068
       ##     Explained_by_Perceptions_of_corruption
-      ## 134                                  0.109
-      ## 135                                  0.116
-      ## 136                                  0.136
-      ## 137                                  0.082
-      ## 138                                  0.131
-      ## 139                                  0.072
-      ## 140                                  0.053
-      ## 141                                  0.085
-      ## 142                                  0.029
-      ## 143                                  0.088
+      ## 131                                  0.160
+      ## 132                                  0.113
+      ## 133                                  0.109
+      ## 134                                  0.116
+      ## 135                                  0.136
+      ## 136                                  0.082
+      ## 137                                  0.131
+      ## 138                                  0.072
+      ## 139                                  0.053
+      ## 140                                  0.085
+      ## 141                                  0.029
       ##     Explained_by_Freedom_to_make_life_choices
-      ## 134                                     0.727
-      ## 135                                     0.284
-      ## 136                                     0.571
-      ## 137                                     0.567
-      ## 138                                     0.487
-      ## 139                                     0.473
-      ## 140                                     0.469
-      ## 141                                     0.523
-      ## 142                                     0.173
-      ## 143                                     0.000
+      ## 131                                     0.172
+      ## 132                                     0.362
+      ## 133                                     0.727
+      ## 134                                     0.284
+      ## 135                                     0.571
+      ## 136                                     0.567
+      ## 137                                     0.487
+      ## 138                                     0.473
+      ## 139                                     0.469
+      ## 140                                     0.523
+      ## 141                                     0.173
 
   ``` r
-  # Combine top 5 and bottom 5 for comparison
-  comparison_data <- rbind(top_10_countries, bottom_10_countries)
-  comparison_data$Group <- rep(c("Top 10", "Bottom 10"), each = 10)
+  # Combine top 11 and bottom 11 for comparison
+  comparison_data <- rbind(top_11_countries, bottom_11_countries)
+  comparison_data$Group <- rep(c("Top 11", "Bottom 11"), each = 11)
   ```
 
   ``` r
   # Plot for Generosity
   ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Generosity), y = Explained_by_Generosity, fill = Group)) +
     geom_bar(stat = "identity", position = position_dodge()) +
-    labs(title = "Generosity in Top 10 vs Bottom 10 Happiest Countries", x = "Country", y = "Generosity") +
+    labs(title = "Generosity in Top 11 vs Bottom 11 Happiest Countries", x = "Country", y = "Generosity") +
     theme_minimal() +
      theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-    scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
-  ```
-
-  ![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
-
-  ``` r
-  # Plot for Perceptions of Corruption
-  ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Perceptions_of_corruption), y = Explained_by_Perceptions_of_corruption, fill = Group)) +
-    geom_bar(stat = "identity", position = position_dodge()) +
-    labs(title = "Perceptions of Corruption in Top 10 vs Bottom 10", x = "Country", y = "Perceptions of Corruption") +
-    theme_minimal() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
+    scale_fill_manual(values = c("Top 11" = "blue", "Bottom 11" = "red"))
   ```
 
   ![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
   ``` r
-  # Plot for freedom to make life choices
-  ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Freedom_to_make_life_choices), y = Explained_by_Freedom_to_make_life_choices, fill = Group)) +
+  # Plot for Perceptions of Corruption
+  ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Perceptions_of_corruption), y = Explained_by_Perceptions_of_corruption, fill = Group)) +
     geom_bar(stat = "identity", position = position_dodge()) +
-    labs(title = "Freedom make life choices in Top 10 vs Bottom 10", x = "Country", y = "Perceptions of Freedom") +
+    labs(title = "Perceptions of Corruption in Top 11 vs Bottom 11", x = "Country", y = "Perceptions of Corruption") +
     theme_minimal() +
      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    scale_fill_manual(values = c("Top 10" = "blue", "Bottom 10" = "red"))
+    scale_fill_manual(values = c("Top 11" = "blue", "Bottom 11" = "red"))
   ```
 
   ![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
+  ``` r
+  # Plot for freedom to make life choices
+  ggplot(comparison_data, aes(x = reorder(Country_name, -Explained_by_Freedom_to_make_life_choices), y = Explained_by_Freedom_to_make_life_choices, fill = Group)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    labs(title = "Freedom make life choices in Top 11 vs Bottom 11", x = "Country", y = "Perceptions of Freedom") +
+    theme_minimal() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_manual(values = c("Top 11" = "blue", "Bottom 11" = "red"))
+  ```
+
+  ![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
   ### **Perceptions of Corruption Graph Analysis**
 
-  1.  **Lower Corruption in Happier Countries**: The top 10 happiest
+  1.  **Lower Corruption in Happier Countries**: The top 11 happiest
       countries (Denmark, Finland, Sweden, Israel, Iceland) have
       significantly lower perceptions of corruption compared to the
-      bottom 10 (Afghanistan, Lesotho, Congo (Kinshasa), Sierra Leone,
+      bottom 11 (Afghanistan, Lesotho, Congo (Kinshasa), Sierra Leone,
       Lebanon). This indicates a trend where higher happiness levels
       correlate with lower perceived corruption.
 
-  2.  **Uniformity Among Top Countries**: The top 10 countries show a
+  2.  **Uniformity Among Top Countries**: The top 11 countries show a
       relatively uniform low level of perceived corruption, suggesting a
       stable and trustworthy public sector which could be contributing
       to higher happiness scores.
 
-- **Variability Among Less Happy Countries**: The bottom 10 countries
+- **Variability Among Less Happy Countries**: The bottom 11 countries
   display a wider range of perceptions of corruption. This variability
   might reflect differing levels of governance and institutional
   effectiveness, which can affect societal happiness.
 
   ### **Generosity Graph Analysis**
 
-  1.  **Comparative Generosity**: While both the top 10 and bottom 10
-      countries show variability in generosity, the top 5 happiest
+  1.  **Comparative Generosity**: While both the top 11 and bottom 11
+      countries show variability in generosity, the top 11 happiest
       countries generally display higher levels of generosity compared
-      to the bottom 5. This suggests that societal generosity could be
+      to the bottom 11. This suggests that societal generosity could be
       associated with greater happiness.
 
   2.  **High Generosity Even in Less Happy Countries**: Notably, some of
@@ -632,9 +660,9 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
 
   ### **Analysis of the Freedom Graph:**
 
-  1.  **Top 10 Countries (Blue Bars)**:
+  1.  **Top 11 Countries (Blue Bars)**:
 
-      - The top 10 countries show very high levels of perceived freedom
+      - The top 11 countries show very high levels of perceived freedom
         to make life choices, with values generally clustering above
         0.75.
 
@@ -646,10 +674,10 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
       - The uniformity of high scores in this group suggests a
         significant role of freedom in their high happiness rankings.
 
-  2.  **Bottom 10 Countries (Red Bars):**
+  2.  **Bottom 11 Countries (Red Bars):**
 
-      - The bottom 10 countries exhibit considerably lower perceptions
-        of freedom compared to the top 10.
+      - The bottom 11 countries exhibit considerably lower perceptions
+        of freedom compared to the top 11.
 
       - The scores decrease progressively among these countries,
         reaching the lowest with Afghanistan. This group includes
@@ -672,7 +700,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
   hist(clean_Happy_data$Ladder_score, breaks = 20, main = "Histogram of Ladder Scores", xlab = "Ladder Score", col = "blue")
   ```
 
-  ![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+  ![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
   ``` r
   # Q-Q plot for checking normality
@@ -680,7 +708,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
   qqline(clean_Happy_data$Ladder_score, col = "red", lwd = 2)
   ```
 
-  ![](README_files/figure-gfm/unnamed-chunk-14-2.png)<!-- -->
+  ![](README_files/figure-gfm/unnamed-chunk-15-2.png)<!-- -->
 
   ### **Histogram Analysis:**
 
@@ -744,7 +772,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
        xlab="Healthy Life Expectancy", col="blue", border="black")
   ```
 
-  ![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+  ![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
   ``` r
   # Histogram for Freedom to make life choices
@@ -752,7 +780,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
        xlab="Freedom to Make Life Choices", col="red", border="black")
   ```
 
-  ![](README_files/figure-gfm/unnamed-chunk-15-2.png)<!-- -->
+  ![](README_files/figure-gfm/unnamed-chunk-16-2.png)<!-- -->
 
   ``` r
   # Reset the plotting area
@@ -767,7 +795,7 @@ grid(nx = NULL, ny = NULL, col = "gray", lty = "dotted")
          col=c("blue", "red"), lty=1, lwd=2)
   ```
 
-  ![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+  ![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 ### **Histogram Analysis**
 
